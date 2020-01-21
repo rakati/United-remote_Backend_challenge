@@ -1,5 +1,6 @@
 ## Task to do for finishing united remote backend-coding-challenge
 
+0. create new python envirement
 1. Set the general structure files and folders for flask api
 2. Create basic rest api handle the request from github api using Flask
 3. Create documentation using swagger
