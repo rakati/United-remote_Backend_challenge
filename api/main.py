@@ -1,12 +1,11 @@
 from flask import Flask, jsonify
-import process_data
 
 app = Flask(__name__)
 
 # General message to inform user how to use api
 # and let user know about documentaiont available
 @app.route('/')
-def general_msg()
+def general_msg():
 	return "general info"
 # return list of languages in 100 trending repo on github
 # with the number of repos for each languages and list of repos created in it
