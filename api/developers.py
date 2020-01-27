@@ -2,7 +2,6 @@ from bs4 import BeautifulSoup
 import requests as req
 import json
 
-
 def get_developers(html):
 	'''
 		Parameter :
@@ -60,7 +59,7 @@ def get_repositories(html):
 	return developers_repo_list
 
 
-def trending_developers(range='daily', language=None):
+def trending_developers(range, language=None):
 	'''
 		parameters:
 			range : can take one value [default = daily, weekly, monthly]
@@ -70,18 +69,7 @@ def trending_developers(range='daily', language=None):
 			or all languages, the json containe:
 				developer_name, developer_github_profile, developer, trending_repo
 	'''
-	# check range validity
-	if range not in ['daily', 'weekly', 'monthly']:
-		return {
-					"error": [
-						{
-						"status": "422",
-						"title":  "Invalid Attribute",
-						"detail": "range must be one of ['daily', 'weekly', 'monthly']"
-						}
-					]
-				}
-	
+
 	# Get page html content
 	if language != None:
 		html = req.get("https://github.com/trending/developers/%s?since=%s" %(language, range)).text
@@ -95,6 +83,5 @@ def trending_developers(range='daily', language=None):
 	repos_list = get_repositories(html)
 	# Add eatch repo to it's owner
 	for dev, repo in zip(result['trending_developers'], repos_list):
-		dev['trending_repositories'] = repo
-	print(json.dumps(result, indent=2))
+		dev['trending_repositorie'] = repo
 	return result
