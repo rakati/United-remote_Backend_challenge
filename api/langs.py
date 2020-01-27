@@ -1,6 +1,5 @@
 import json
-import httplib2
-
+import requests
 
 def	get_repositories_of_lagugage(search_lang, repos_list):
 	'''
@@ -45,13 +44,9 @@ def trending_languages():
 					repositorie number of watchers
 
 	'''
-	# url = "https://api.github.com/search/repositories?q=forks:>1000&sort:stars&per_page=100"
-	# h = httplib2.Http()
-	# data = json.loads(h.request(url, 'GET')[1])
-	
-	with open('../data/langs.json') as f:
-		# Parse json string into dictionary
-		data = json.load(f)
+	url = "https://api.github.com/search/repositories?q=forks:>1000&sort:stars&per_page=100"
+	resp = requests.get(url)
+	data = resp.json()
 	
 	# Extract trending languages
 	languages_set = {item['language'] for item in data['items'] if item['language'] != None}
@@ -69,4 +64,3 @@ def trending_languages():
 			"repositories" : language_repos
 		})
 	return res
-
