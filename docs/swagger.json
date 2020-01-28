@@ -1,0 +1,85 @@
+{
+	"openapi": "3.0.0",
+	"info": {
+	  "description": "sean",
+	  "version": "1.0.0",
+	  "title": "Github trendings",
+	  "contact": {
+		"email": "ouhaddou.nouredine@gmail.com"
+	  },
+	  "license": {
+		"name": "MIT",
+		"url": "https://opensource.org/licenses/MIT"
+	  }
+	},
+	"servers" : [
+		{
+			"url" : "/"
+		}
+	],
+	"tags" : [
+		{
+			"name" : "developers request",
+			"description" : "Axample API for requesting trending Github developers"
+		}
+	],
+	"components": {
+	  "schemas": {
+		"/": {
+			"type" : "objet",
+			{
+				"trending_github_languages_url" : "string",
+				"properties" : {
+					
+				}
+			},
+		  "properties": {
+			"uuid": {
+			  "type": "string"
+			}
+		  }
+		},
+		"bookRequestPostBody": {
+		  "type": "object",
+		  "properties": {
+			"title": {
+			  "type": "string",
+			  "format": "string"
+			},
+			"email": {
+			  "type": "string",
+			  "format": "email"
+			}
+		  }
+		},
+		"bookRequest": {
+		  "type": "object",
+		  "properties": {
+			"title": {
+			  "type": "string",
+			  "format": "string"
+			},
+			"email": {
+			  "type": "string",
+			  "format": "email"
+			},
+			"timestamp": {
+			  "type": "string",
+			  "format": "number"
+			}
+		  }
+		},
+		"bookRequests": {
+		  "type": "object",
+		  "properties": {
+			"bookRequest": {
+			  "type": "object",
+			  "additionalProperties": {
+				"$ref": "#/components/schemas/bookRequest"
+			  }
+			}
+		  }
+		}
+	  }
+	}
+  }
