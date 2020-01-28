@@ -19,7 +19,7 @@ config = {
     "DEBUG": True,          		# some Flask specific configs
     "CACHE_TYPE": "simple", 		# Flask-Caching related configs
     "CACHE_DEFAULT_TIMEOUT": 60,	# Set default timeout to 60 minute
-	"JSON_SORT_KEYS" : False		# this for keeping the order of json data
+    "JSON_SORT_KEYS" : False		# this for keeping the order of json data
 }
 
 app = Flask(__name__)
@@ -28,10 +28,10 @@ cache = Cache(app)
 
 # Initialize limiter with default 
 limiter = Limiter(
-	app,
-	key_func=get_remote_address,
-	headers_enabled=True,
-	default_limits=["40 per hour"],
+    app,
+    key_func=get_remote_address,
+    headers_enabled=True,
+    default_limits=["40 per hour"],
 )
 
 # Rate limit headers
@@ -47,17 +47,17 @@ limiter.header_mapping = {
 
 @app.route('/docs/<path:path>')
 def send_static(path):
-	return send_from_directory('../docs', path)
+    return send_from_directory('../docs', path)
 
 # API Documentation config
 SWAGGER_URL = '/docs'
 API_URL = '/docs/swagger.json'
 swaggerui_blueprint = get_swaggerui_blueprint(
-	SWAGGER_URL,
-	API_URL,
-	config={
-		'app_name' : "Github_Trendings"
-	}
+    SWAGGER_URL,
+    API_URL,
+    config={
+        'app_name' : "Github_Trendings"
+    }
 )
 
 app.register_blueprint(swaggerui_blueprint, url_prefix=SWAGGER_URL)
