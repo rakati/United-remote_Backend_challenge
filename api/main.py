@@ -1,11 +1,11 @@
 from api import *
-import urllib.parse
+import urllib
 
 # Override the default key generation
 # this for url with query string
 def cache_key():
    args = request.args
-   key = request.path + '?' + urllib.parse.urlencode([
+   key = request.path + '?' + urllib.urlencode([
      (k, v) for k in sorted(args) for v in sorted(args.getlist(k))
    ])
    return key
