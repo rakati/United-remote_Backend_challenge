@@ -1,4 +1,4 @@
-<a href="https://www.udacity.com/">
+<a href="https://www.gemography.com/">
   <img src="https://assets.website-files.com/5e1da0fec60936a02bf7cd72/5e1da35cd91bf431ea16115a_Gemof.svg" width="300" alt="Udacity logo">
 </a>
 	<h1  align="center">Gemography backend-coding-challenge</h1>
