@@ -48,13 +48,13 @@ limiter.header_mapping = {
 # app.config['JSON_SORT_KEYS'] = False
 
 
-@app.route('/docs/<path:path>')
-def send_static(path):
-    return send_from_directory('../docs', path)
+@app.route('/static/swagger.json')
+def send_static():
+    return send_from_directory('../static', 'swagger.json')
 
 # API Documentation config
 SWAGGER_URL = '/docs'
-API_URL = '/docs/swagger.json'
+API_URL = '/static/swagger.json'
 swaggerui_blueprint = get_swaggerui_blueprint(
     SWAGGER_URL,
     API_URL,
