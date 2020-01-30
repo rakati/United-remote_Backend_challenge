@@ -1,82 +1,346 @@
 {
 	"openapi": "3.0.0",
 	"info": {
-	  "description": "sean",
-	  "version": "1.0.0",
-	  "title": "Github trendings",
+	  "title": "United-Remote backend challenge REST API",
+	  "description": "This is a sample API list trending languages in 100 trending Github repositories, trending developers and repositories with more features.",
 	  "contact": {
-		"email": "ouhaddou.nouredine@gmail.com"
+		"email": "ouhaddou.nouredine@swagger.io"
 	  },
-	  "license": {
-		"name": "MIT",
-		"url": "https://opensource.org/licenses/MIT"
+	  "version": "1.0.0"
+	},
+	"servers": [
+	  {
+		"url": "http://localhost:8100"
+	  }
+	],
+	"tags": [
+	  {
+		"name": "languages",
+		"description": "Get Github Trending languages"
+	  },
+	  {
+		"name": "developers",
+		"description": "Get Github Trending developers"
+	  }
+	],
+	"paths": {
+	  "/": {
+		"get": {
+		  "tags": [
+			"Info"
+		  ],
+		  "responses": {
+			"200": {
+			  "description": "OK",
+			  "content": {
+				"application/json": {
+				  "schema": {
+					"$ref": "#/components/schemas/Info"
+				  }
+				}
+			  }
+			}
+		  }
+		}
+	  },
+	  "/languages": {
+		"get": {
+		  "tags": [
+			"languages"
+		  ],
+		  "responses": {
+			"200": {
+			  "description": "OK",
+			  "content": {
+				"application/json": {
+				  "schema": {
+					"$ref": "#/components/schemas/languages"
+				  }
+				}
+			  },
+			  "headers": {
+				"X-RateLimit-Limit": {
+				  "schema": {
+					"type": "integer"
+				  },
+				  "description": "Request limit per hour."
+				},
+				"X-RateLimit-Remaining": {
+				  "schema": {
+					"type": "integer"
+				  },
+				  "description": "The number of requests left for the time window."
+				},
+				"X-RateLimit-Reset": {
+				  "schema": {
+					"type": "string",
+					"format": "date-time"
+				  },
+				  "description": "The UTC date/time at which the current rate limit window resets."
+				}
+			  }
+			},
+			"429": {
+			  "description": "Rate limit exceeded",
+			  "content": {
+				"application/json": {
+				  "schema": {
+					"$ref": "#/components/schemas/rate_limit"
+				  }
+				}
+			  }
+			}
+		  }
+		}
+	  },
+	  "/developers": {
+		"get": {
+		  "tags": [
+			"developers"
+		  ],
+		  "summary": "get Github trending developers",
+		  "parameters": [
+			{
+			  "in": "query",
+			  "name": "since",
+			  "required": false,
+			  "schema": {
+				"type": "string",
+				"enum": [
+				  "daily",
+				  "weekly",
+				  "monthly"
+				]
+			  }
+			}
+		  ],
+		  "responses": {
+			"200": {
+			  "description": "OK",
+			  "content": {
+				"application/json": {
+				  "schema": {
+					"$ref": "#/components/schemas/developers"
+				  }
+				}
+			  },
+			  "headers": {
+				"X-RateLimit-Limit": {
+				  "schema": {
+					"type": "integer"
+				  },
+				  "description": "Request limit per hour."
+				},
+				"X-RateLimit-Remaining": {
+				  "schema": {
+					"type": "integer"
+				  },
+				  "description": "The number of requests left for the time window."
+				},
+				"X-RateLimit-Reset": {
+				  "schema": {
+					"type": "string",
+					"format": "date-time"
+				  },
+				  "description": "The UTC date/time at which the current rate limit window resets."
+				}
+			  }
+			}
+		  }
+		}
+	  },
+	  "/developers/{language_name}": {
+		"get": {
+		  "tags": [
+			"developers"
+		  ],
+		  "summary": "get Github trending developers by language name",
+		  "parameters": [
+			{
+			  "in": "path",
+			  "name": "language_name",
+			  "required": true,
+			  "schema": {
+				"type": "string"
+			  },
+			  "description": "the language name"
+			},
+			{
+			  "in": "query",
+			  "name": "since",
+			  "required": false,
+			  "schema": {
+				"type": "string",
+				"enum": [
+				  "daily",
+				  "weekly",
+				  "monthly"
+				]
+			  }
+			}
+		  ],
+		  "responses": {
+			"200": {
+			  "description": "OK",
+			  "content": {
+				"application/json": {
+				  "schema": {
+					"$ref": "#/components/schemas/developers"
+				  }
+				}
+			  },
+			  "headers": {
+				"X-RateLimit-Limit": {
+				  "schema": {
+					"type": "integer"
+				  },
+				  "description": "Request limit per hour."
+				},
+				"X-RateLimit-Remaining": {
+				  "schema": {
+					"type": "integer"
+				  },
+				  "description": "The number of requests left for the time window."
+				},
+				"X-RateLimit-Reset": {
+				  "schema": {
+					"type": "string",
+					"format": "date-time"
+				  },
+				  "description": "The UTC date/time at which the current rate limit window resets."
+				}
+			  }
+			}
+		  }
+		}
 	  }
 	},
-	"servers" : [
-		{
-			"url" : "/"
-		}
-	],
-	"tags" : [
-		{
-			"name" : "developers request",
-			"description" : "Axample API for requesting trending Github developers"
-		}
-	],
 	"components": {
 	  "schemas": {
-		"/": {
-			"type" : "objet",
-			{
-				"trending_github_languages_url" : "string",
-				"properties" : {
-					
+		"Info": {
+		  "type": "object",
+		  "description": "url for all entry points available",
+		  "properties": {
+			"trending github languages url": {
+			  "type": "string",
+			  "description": "url for trending Github languages in trending Github repositories entry point"
+			},
+			"trending github developers url": {
+			  "type": "string",
+			  "description": "url for trending Github developers entry point"
+			},
+			"trending github repositories url": {
+			  "type": "string",
+			  "description": "url for trending Github repositories entry point"
+			},
+			"API documentation url": {
+			  "type": "string",
+			  "description": "API documentation url"
+			}
+		  }
+		},
+		"languages": {
+		  "type": "object",
+		  "properties": {
+			"languages_count": {
+			  "type": "integer"
+			},
+			"incomplete_results": {
+			  "type": "boolean"
+			},
+			"languages": {
+			  "type": "array",
+			  "items": {
+				"type": "object",
+				"properties": {
+				  "name": {
+					"type": "string",
+					"description": "language name"
+				  },
+				  "repositories_count": {
+					"type": "integer",
+					"description": "number of repositories using that language"
+				  },
+				  "repositories": {
+					"type": "array",
+					"description": "list of repositories using that language",
+					"items": {
+					  "type": "object",
+					  "properties": {
+						"repositorie_name": {
+						  "type": "string"
+						},
+						"owner_name": {
+						  "type": "string"
+						},
+						"repositorie_url": {
+						  "type": "string"
+						},
+						"forks": {
+						  "type": "integer"
+						},
+						"watchers": {
+						  "type": "integer"
+						},
+						"stars": {
+						  "type": "integer"
+						}
+					  }
+					}
+				  }
 				}
-			},
-		  "properties": {
-			"uuid": {
-			  "type": "string"
-			}
-		  }
-		},
-		"bookRequestPostBody": {
-		  "type": "object",
-		  "properties": {
-			"title": {
-			  "type": "string",
-			  "format": "string"
-			},
-			"email": {
-			  "type": "string",
-			  "format": "email"
-			}
-		  }
-		},
-		"bookRequest": {
-		  "type": "object",
-		  "properties": {
-			"title": {
-			  "type": "string",
-			  "format": "string"
-			},
-			"email": {
-			  "type": "string",
-			  "format": "email"
-			},
-			"timestamp": {
-			  "type": "string",
-			  "format": "number"
-			}
-		  }
-		},
-		"bookRequests": {
-		  "type": "object",
-		  "properties": {
-			"bookRequest": {
-			  "type": "object",
-			  "additionalProperties": {
-				"$ref": "#/components/schemas/bookRequest"
 			  }
+			}
+		  }
+		},
+		"developers": {
+		  "type": "array",
+		  "items": {
+			"type": "object",
+			"properties": {
+			  "name": {
+				"type": "string",
+				"description": "repositry name"
+			  },
+			  "url": {
+				"type": "string",
+				"description": "repository github url"
+			  },
+			  "trending_repositorie": {
+				"type": "object",
+				"description": "trending repository of the developer",
+				"properties": {
+				  "name": {
+					"type": "string",
+					"description": "the repository name"
+				  },
+				  "url": {
+					"type": "string",
+					"description": "repositry github url"
+				  }
+				}
+			  }
+			}
+		  }
+		},
+		"rate_limit": {
+		  "type": "object",
+		  "properties": {
+			"status": {
+			  "type": "string",
+			  "description": "response status"
+			},
+			"title": {
+			  "type": "string",
+			  "description": "error title"
+			},
+			"message": {
+			  "type": "string",
+			  "description": "error message"
+			},
+			"documentation_url": {
+			  "type": "string",
+			  "description": "documentation url"
 			}
 		  }
 		}
