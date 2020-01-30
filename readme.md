@@ -33,6 +33,9 @@ Code in this repository is provided under the terms of the [MIT license](https:/
 
 This is a simple REST API that list the list the languages used by the 100 based on straightforward algorithm which is the most starred repositories created on last month, also the api provide also the trending Github developers.
 
+## Notes
+- For Framework popularity over the 100 repositories the github API doesn't provide repository framework, so I didn't do it.
+
 ## Technologies used
 
 	- Flask			: lightweight WSGI web application framework
@@ -49,18 +52,18 @@ This is a simple REST API that list the list the languages used by the 100 based
 1. clone the project
 	`git clone https://github.com/rakati/United-remote_Backend_challenge.git`
 2. cd into project directory
-	`cd United-remote_Backend_challenge.git`
+	`cd United-remote_Backend_challenge`
 3. Build docker image of the API
-	`docker build -t flaskApp .`
+	`docker build -t flaskapp .`
 4. Run the docker container
-	`docker run -it -d -p 8100:8100 flaskApp`
+	`docker run -it -d -p 8100:8100 flaskapp`
 
-Now the API is working on [http//localhost:8100/](http//localhost:8100/)
+Now the API is working on [http//localhost:8100/](http://localhost:8100/)
 
 ## Documentation
 
 The documenation is built with Swagger UI, A beautiful and interactive documentation
-check this url [documentation](http//localhost:8100/docs)
+check this url [documentation](http://localhost:8100/docs)
 ![Image of API DOCS](image/swagger.jpg)
 
 ## Entry points
