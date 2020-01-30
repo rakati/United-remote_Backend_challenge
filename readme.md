@@ -58,7 +58,7 @@ This is a simple REST API that list the list the languages used by the 100 based
 4. Run the docker container
 	`docker run -it -d -p 8100:8100 flaskapp`
 
-Now the API is working on [http//localhost:8100/](http://localhost:8100/)
+Now the API is working on [http://localhost:8100/](http://localhost:8100/)
 
 ## Documentation
 
