@@ -1,5 +1,6 @@
 import json
 import requests
+from datetime import date, timedelta
 
 def	get_repositories_of_lagugage(search_lang, repos_list):
 	'''
@@ -44,7 +45,9 @@ def trending_languages():
 					repositorie number of watchers
 
 	'''
-	url = "https://api.github.com/search/repositories?q=forks:>1000&sort:stars&per_page=100"
+	# get date of Previous month
+	prev_month = (date.today().replace(day=1) - timedelta(days=1))
+	url = "https://api.github.com/search/repositories?q=created:>=%s&sort=stars&order=desc&per_page=100" %(prev_month.strftime("%Y-%m-%d"))
 	resp = requests.get(url)
 	data = resp.json()
 	
@@ -53,7 +56,7 @@ def trending_languages():
 
 	res = {
 		"languages_count" : len(languages_set),
-		"incomplete_results": False,
+		"incomplete_results": data['incomplete_results'],
 		"languages" : []
 	}
 	for language in languages_set:
