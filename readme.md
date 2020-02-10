@@ -18,7 +18,7 @@ Code in this repository is provided under the terms of the [MIT license](https:/
   - [Requirements](#requirements)
   - [Install](#Install)
 - [Documentation](#Documentation)
-- [End Points](#end-points)
+- [End Points](#Entry-points)
 
 
 ## About the challenge
