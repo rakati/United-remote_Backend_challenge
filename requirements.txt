@@ -9,7 +9,7 @@ Flask-Limiter==1.1.0
 flask-swagger-ui==3.20.9
 gevent==1.4.0
 greenlet==0.4.15
-httplib2==0.16.0
+httplib2==0.18.0
 idna==2.8
 itsdangerous==1.1.0
 Jinja2==2.10.3
